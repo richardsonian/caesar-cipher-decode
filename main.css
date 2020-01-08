@@ -1,33 +1,32 @@
-.letter-selector{
-    display: inline-block;
-    margin: 2em;
-    width:50%;
-    background-color: blue;
-}
-
-.letter {
-    
-}
-
-#shift_interface{
-    display:block;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 5em;
+#shift-interface {
+    font-family:'Courier New', Courier, monospace;
+    font-size: 48px;
+    font-weight: 500;
     text-align: center;
-    margin:2em;
+    user-select:none;
 }
 
-#reference_letter {
-    display:inline-block;
-}
+.slider {
+    width: 300px;
+    height: 100px;
+    margin:auto;
+    display: flex;
+    overflow-x: auto;
 
-.slick-prev, .slick-next {
-    display:block;
-}
-.slick-prev {
-    content: '←';
-}
+    /*scrolling*/
+    -webkit-overflow-scrolling: auto;
+    scroll-snap-type: x mandatory;
+    
+  }
+  .slider::-webkit-scrollbar { display:none; }
+  .slide {
+    width: 300px;
+    flex-shrink: 0;
+    height: 100%;
 
-.slick-next {
-    content: '→';
-}
+    /*scrolling*/
+    scroll-snap-align: start;
+  }
+
+  
+  
