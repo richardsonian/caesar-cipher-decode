@@ -2,7 +2,7 @@ $(document).ready(function(){
     $('.letter_selector').slick({
         centerMode: true,
         centerPadding: '10px',
-        slidesToShow: 8,
+        slidesToShow: 5,
         responsive: [
           {
             breakpoint: 768,
