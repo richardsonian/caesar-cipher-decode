@@ -5,28 +5,42 @@
     text-align: center;
     user-select:none;
 }
-
-.slider {
-    width: 300px;
-    height: 100px;
+#slider {
+    width: 500px;
+    height: 80px;
     margin:auto;
     display: flex;
     overflow-x: auto;
 
     /*scrolling*/
+    scroll-behavior: auto; /*smooth*/
     -webkit-overflow-scrolling: auto;
     scroll-snap-type: x mandatory;
     
   }
-  .slider::-webkit-scrollbar { display:none; }
-  .slide {
-    width: 300px;
+  #slider::-webkit-scrollbar { display:none; } /*Hide scrollbar*/
+  .slider-node {
+    width: 100px;
     flex-shrink: 0;
     height: 100%;
 
     /*scrolling*/
-    scroll-snap-align: start;
+    scroll-snap-align: center;
   }
+  #shift-display {
+      font-size:32px;
+  }
+  .slider-cointainer {
+      display:flex;
+      flex-direction: row;
+  }
+  .slider-button {
+      display:inline-block;
+      width:50px;
+      height: 50px;
+      font-size:24px;
+  }
+
 
   
   
