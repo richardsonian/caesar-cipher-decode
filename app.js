@@ -1,18 +1,21 @@
+//global consts
+const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
 document.addEventListener('DOMContentLoaded', (event) => {
   console.log('DOM Content Loaded');
 
   //consts
   const sliderNodeWidth = 100; //px
-  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const numLettersShown = 5
 
   //variables
   let slider = document.getElementById('slider');
-
+  let numSpacers = (numLettersShown - 1) / 2;
+  /*
   let sliderWidth = slider.getBoundingClientRect().width;
   let numLettersShown = sliderWidth / sliderNodeWidth;
   console.log(numLettersShown + " letters shown");
-  let numSpacers = (numLettersShown - 1) / 2;
-
+  */
   let sliderNodes = []; //not including spacer nodes
 
   /*-- Initialize Slider Nodes --*/
@@ -30,6 +33,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   addEmptyNodes(slider, 'slider-node', numSpacers);  //right spacer nodes
 
   /*-- Slider Scroll Callback --*/
+  var currentShift = null;
   var onSliderScrollDone = function() {
     //helper function to see if element is incenter
     let isInCenter = function(element) {
@@ -49,10 +53,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     console.log(selectedNode.textContent + " is selected.");
     
     //calculate shift
-    let shift = alphabet.indexOf(selectedNode.textContent);
+    currentShift = alphabet.indexOf(selectedNode.textContent);
     //display shift
     let shiftDisplay = document.getElementById('shift-display');
-    shiftDisplay.textContent = '+' + shift;
+    shiftDisplay.textContent = '+' + currentShift;
   };
   //run callback on page init
   onSliderScrollDone();
@@ -81,6 +85,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
     slider.scrollBy({top:0, left:sliderNodeWidth, behavior:"smooth"});
   }
 
+  /*-- Listener for text change --*/
+  let textbox = document.getElementById('input-text');
+  textbox.addEventListener('change', (event) => {
+    console.log('text changed');
+    let cypherText = textbox.value;
+    let plainText = shiftText(cypherText, -currentShift);
+
+    document.getElementById('output-container').textContent = plainText;
+  });
+
 }); //End DOMContentLoaded Listener
 
 /*-- Global Helper functions --*/
@@ -90,4 +104,18 @@ function addEmptyNodes(parent, childClass, childQuantity) {
     node.className = childClass;
     parent.appendChild(node); //not added to slidernodes
   }
+}
+
+function shiftText(inputText, shift) {
+  let outputText = "";
+  for(let i = 0; i < inputText.length; i++) {
+    let char = inputText.charAt(i);
+    let charIndex = alphabet.toLowerCase().indexOf(char.toLowerCase());
+    let newCharIndex = (charIndex + shift) % inputText.length;
+    let newChar = alphabet.charAt(newCharIndex);
+    newChar = char === char.toLowerCase() ? newChar.toLowerCase() : newChar.toUpperCase(); //ensure is right case
+
+    outputText += newChar;
+  }
+  return outputText;
 }
