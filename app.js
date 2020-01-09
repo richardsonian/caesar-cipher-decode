@@ -86,11 +86,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
   }
 
   /*-- Listener for text change --*/
-  let textbox = document.getElementById('input-text');
+  let textbox = document.getElementById('input-box');
   textbox.addEventListener('change', (event) => {
     console.log('text changed');
     let cypherText = textbox.value;
-    let plainText = shiftText(cypherText, -currentShift);
+    let plainText = shiftText(cypherText, currentShift);
 
     document.getElementById('output-container').textContent = plainText;
   });
@@ -110,10 +110,17 @@ function shiftText(inputText, shift) {
   let outputText = "";
   for(let i = 0; i < inputText.length; i++) {
     let char = inputText.charAt(i);
-    let charIndex = alphabet.toLowerCase().indexOf(char.toLowerCase());
-    let newCharIndex = (charIndex + shift) % inputText.length;
-    let newChar = alphabet.charAt(newCharIndex);
-    newChar = char === char.toLowerCase() ? newChar.toLowerCase() : newChar.toUpperCase(); //ensure is right case
+
+    let newChar;
+    if(alphabet.includes(char.toUpperCase())) { //if is a letter
+      let charIndex = alphabet.toLowerCase().indexOf(char.toLowerCase());
+      let newCharIndex = (charIndex + shift) % inputText.length;
+      newChar = alphabet.charAt(newCharIndex);
+      newChar = char === char.toLowerCase() ? newChar.toLowerCase() : newChar.toUpperCase(); //ensure is right case
+    }
+    else {
+      newChar = char;
+    }
 
     outputText += newChar;
   }
