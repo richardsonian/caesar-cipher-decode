@@ -12,7 +12,7 @@
     /*div shaping*/
     width: 500px;
     height: 80px;
-    vertical-align: center;
+    vertical-align: middle;
 
     /*flex container settings*/
     display: inline-flex;
@@ -37,6 +37,17 @@
     /*scrolling*/
     scroll-snap-align: center;
   }
+  #selector-outline {
+    position:absolute;
+    left:calc(50% - 27px);
+    top:10px;
+
+    width:50px;
+    height:120px;
+
+    border: solid 4px black;
+    border-radius: 5px;
+  }
   #shift-display {
     font-size:32px;
   }
@@ -55,5 +66,5 @@
     font-size:24px;
     flex:initial;
     cursor: pointer;
-    vertical-align: center;
+    vertical-align: middle;
   }
