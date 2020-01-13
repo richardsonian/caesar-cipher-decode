@@ -12,6 +12,7 @@
     /*div shaping*/
     width: 500px;
     height: 80px;
+    vertical-align: center;
 
     /*flex container settings*/
     display: inline-flex;
@@ -45,7 +46,7 @@
     justify-content: center;
     align-items: center;
     margin:auto;
-    
+    height:100px;
   }
   .slider-button {
     width:50px;
@@ -54,4 +55,5 @@
     font-size:24px;
     flex:initial;
     cursor: pointer;
+    vertical-align: center;
   }
