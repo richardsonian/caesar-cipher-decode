@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let cypherText = textbox.value;
     let plainText = shiftText(cypherText, currentShift);
 
-    document.getElementById('output-container').textContent = plainText;
+    document.getElementById('output-container').innerHTML = replaceNewlineWithBreak(plainText);
   });
 
 }); //End DOMContentLoaded Listener
@@ -110,19 +110,28 @@ function shiftText(inputText, shift) {
   let outputText = "";
   for(let i = 0; i < inputText.length; i++) {
     let char = inputText.charAt(i);
-
+    //console.log("Reading char: " + char);
     let newChar;
     if(alphabet.includes(char.toUpperCase())) { //if is a letter
-      let charIndex = alphabet.toLowerCase().indexOf(char.toLowerCase());
-      let newCharIndex = (charIndex + shift) % inputText.length;
+      let charIndex = alphabet.indexOf(char.toUpperCase());
+      //console.log("Char index: " + charIndex);
+      let newCharIndex = (charIndex + shift) % alphabet.length;
+      if(newCharIndex < 0) {newCharIndex = inputText.length + newCharIndex}; //account for negative 
+      //console.log("Shifted index: " + newCharIndex);
       newChar = alphabet.charAt(newCharIndex);
-      newChar = char === char.toLowerCase() ? newChar.toLowerCase() : newChar.toUpperCase(); //ensure is right case
+      newChar = (char == char.toLowerCase()) ? newChar.toLowerCase() : newChar.toUpperCase(); //ensure is right case
+      //console.log("New char: " + newChar);
     }
-    else {
+    else { //if is not a letter
       newChar = char;
     }
 
     outputText += newChar;
+    //console.log("So far string is: " + outputText);
   }
   return outputText;
+}
+
+function replaceNewlineWithBreak(inputText) {
+  return inputText.replace(/(?:\r\n|\r|\n)/g, '<br>');
 }
