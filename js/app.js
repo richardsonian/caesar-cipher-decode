@@ -33,8 +33,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   addEmptyNodes(slider, 'slider-node', numSpacers);  //right spacer nodes
 
   /*-- Slider Scroll Callback --*/
-  var currentShift = null;
-  var onSliderScrollDone = function() {
+  var getShiftFromSlider = function() {
     //helper function to see if element is incenter
     let isInCenter = function(element) {
       let accuracy = 0;
@@ -51,12 +50,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
     sliderNodes.forEach(node => {if(isInCenter(node)) {selectedNode = node;}});
     if(selectedNode === undefined) {return;} //exit callback if no node is in middle
     console.log(selectedNode.textContent + " is selected.");
-    
+
     //calculate shift
-    currentShift = alphabet.indexOf(selectedNode.textContent);
+    let shift = alphabet.indexOf(selectedNode.textContent);
+    return shift;
+  }
+  
+
+  var onSliderScrollDone = function() {
+    //calculate shift
+    shift = getShiftFromSlider();
     //display shift
     let shiftDisplay = document.getElementById('shift-display');
-    shiftDisplay.textContent = '+' + currentShift;
+    shiftDisplay.textContent = '+' + shift;
   };
   //run callback on page init
   onSliderScrollDone();
@@ -85,15 +91,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
     slider.scrollBy({top:0, left:sliderNodeWidth, behavior:"smooth"});
   }
 
-  /*-- Listener for text change --*/
+  /*-- Listeners for Encode/Decode buttons --*/
   let textbox = document.getElementById('input-box');
-  textbox.addEventListener('change', (event) => {
-    console.log('text changed');
+  let outbox = document.getElementById('output-container');
+  document.getElementById('encode-button').onclick = function() {
+    let plainText = textbox.value;
+    let shift = getShiftFromSlider();
+    let cypherText = shiftText(plainText, shift);
+    outbox.innerHTML = replaceNewlineWithBreak(cypherText);
+  }
+  document.getElementById('decode-button').onclick = function() {
     let cypherText = textbox.value;
-    let plainText = shiftText(cypherText, currentShift);
-
-    document.getElementById('output-container').innerHTML = replaceNewlineWithBreak(plainText);
-  });
+    let shift = getShiftFromSlider();
+    let plainText = shiftText(cypherText, -shift);
+    outbox.innerHTML = replaceNewlineWithBreak(plainText);
+  }
 
 }); //End DOMContentLoaded Listener
 
@@ -110,24 +122,24 @@ function shiftText(inputText, shift) {
   let outputText = "";
   for(let i = 0; i < inputText.length; i++) {
     let char = inputText.charAt(i);
-    //console.log("Reading char: " + char);
-    let newChar;
+    console.log("Reading char: " + char);
+    let newChar = "";
     if(alphabet.includes(char.toUpperCase())) { //if is a letter
       let charIndex = alphabet.indexOf(char.toUpperCase());
-      //console.log("Char index: " + charIndex);
+      console.log("Char index: " + charIndex);
       let newCharIndex = (charIndex + shift) % alphabet.length;
-      if(newCharIndex < 0) {newCharIndex = inputText.length + newCharIndex}; //account for negative 
-      //console.log("Shifted index: " + newCharIndex);
+      if(newCharIndex < 0) {newCharIndex = alphabet.length + newCharIndex}; //account for negative 
+      console.log("Shifted index: " + newCharIndex);
       newChar = alphabet.charAt(newCharIndex);
       newChar = (char == char.toLowerCase()) ? newChar.toLowerCase() : newChar.toUpperCase(); //ensure is right case
-      //console.log("New char: " + newChar);
+      console.log("New char: " + newChar);
     }
     else { //if is not a letter
       newChar = char;
     }
 
     outputText += newChar;
-    //console.log("So far string is: " + outputText);
+    console.log("So far string is: " + outputText);
   }
   return outputText;
 }

@@ -39,17 +39,21 @@
   }
   #selector-outline {
     position:absolute;
-    left:calc(50% - 27px);
-    top:10px;
+    left:calc(50% - 29px);
+    top:65px;
 
     width:50px;
-    height:120px;
+    height:95px;
 
     border: solid 4px black;
     border-radius: 5px;
   }
   #shift-display {
     font-size:32px;
+    position: absolute;
+    left:calc(50% - 20px);
+    top:165px;
+    text-align:center;
   }
   .slider-cointainer {
     flex-direction: row;
