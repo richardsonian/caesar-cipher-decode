@@ -11,7 +11,7 @@
 
     /*div shaping*/
     width: 500px;
-    height: 80px;
+    height: 60px;
     vertical-align: middle;
 
     /*flex container settings*/
@@ -50,10 +50,8 @@
   }
   #shift-display {
     font-size:32px;
-    position: absolute;
-    left:calc(50% - 20px);
-    top:165px;
-    text-align:center;
+    margin: 0 auto;
+    text-align: center;
   }
   .slider-cointainer {
     flex-direction: row;
@@ -61,7 +59,7 @@
     justify-content: center;
     align-items: center;
     margin:auto;
-    height:100px;
+    height:80px;
   }
   .slider-button {
     width:50px;

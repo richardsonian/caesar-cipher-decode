@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     //find the selected node
     let selectedNode;
     sliderNodes.forEach(node => {if(isInCenter(node)) {selectedNode = node;}});
-    if(selectedNode === undefined) {return;} //exit callback if no node is in middle
+    if(selectedNode === undefined) {return -1;} //exit callback if no node is in middle
     console.log(selectedNode.textContent + " is selected.");
 
     //calculate shift
@@ -59,10 +59,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   var onSliderScrollDone = function() {
     //calculate shift
-    shift = getShiftFromSlider();
+    let currentShift = getShiftFromSlider();
     //display shift
-    let shiftDisplay = document.getElementById('shift-display');
-    shiftDisplay.textContent = '+' + shift;
+    if(currentShift != -1) {
+      let shiftDisplay = document.getElementById('shift-display');
+      shiftDisplay.textContent = '+' + currentShift;
+    }
   };
   //run callback on page init
   onSliderScrollDone();
