@@ -65,8 +65,14 @@
     width:50px;
     height: 50px;
     display: inline-block;
-    font-size:24px;
     flex:initial;
     cursor: pointer;
     vertical-align: middle;
+  }
+  .slider-button:hover{
+    filter:drop-shadow(2px 2px 1px gray)
+  }
+  #scroll-left {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
   }
