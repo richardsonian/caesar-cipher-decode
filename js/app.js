@@ -6,7 +6,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   //consts
   const sliderNodeWidth = 100; //px
-  const numLettersShown = 5
+
+  //dynamic viewport
+  let numLettersShown;
+  if (window.innerWidth >= 700) {
+    numLettersShown = 5;
+  } else {
+    numLettersShown = 3;
+  }
 
   //variables
   let slider = document.getElementById('slider');
