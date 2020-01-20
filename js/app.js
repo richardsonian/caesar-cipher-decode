@@ -4,6 +4,9 @@ const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 document.addEventListener('DOMContentLoaded', (event) => {
   console.log('DOM Content Loaded');
 
+  //reload on resize
+  window.onresize = function(){ location.reload(); }
+
   //consts
   const sliderNodeWidth = 100; //px
 
