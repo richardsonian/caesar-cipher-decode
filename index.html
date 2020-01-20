@@ -6,8 +6,12 @@
 <!--FONTS-->
 <link href="https://fonts.googleapis.com/css?family=IM+Fell+Great+Primer+SC&display=swap" rel="stylesheet">
 <!--CSS-->
-<link rel="stylesheet" type="text/css" href="css/main.css"/>
-<link rel="stylesheet" type="text/css" href="css/shifter.css"/>
+<!--::desktop-->
+<link rel="stylesheet" type="text/css" media='screen and (min-width: 700px)' href="css/desktop/main.css"/>
+<link rel="stylesheet" type="text/css" media='screen and (min-width: 700px)' href="css/desktop/shifter.css"/>
+<!--::mobile-->
+<link rel="stylesheet" type="text/css" media='screen and (max-width: 699px)' href="css/mobile/main.css"/>
+<link rel="stylesheet" type="text/css" media='screen and (max-width: 699px)' href="css/mobile/shifter.css"/>
 </head>
 
 <body>
@@ -15,9 +19,9 @@
 <div id="shift-interface">
     <div id="reference_letter">A</div>
     <div id="slider-container">
-        <div class="slider-button" id="scroll-left">🠜</div>
+        <img class="slider-button" id="scroll-left" src="https://img.icons8.com/ios-filled/50/000000/arrow.png">
         <div id="slider"><!--Children autogen by app.js--></div>
-        <div class="slider-button" id="scroll-right">🠞</div>
+        <img class="slider-button" id="scroll-right" src="https://img.icons8.com/ios-filled/50/000000/arrow.png">
     </div>
     <div id="selector-outline"></div>
     <div id="shift-display"><!--Content gen by app.js--></div>
